@@ -1,0 +1,109 @@
+<div class="container">
+
+  <h4>Cadastre seus clientes</h4>
+
+  <form class="m-5" [formGroup]="formulario" novalidate (ngSubmit)="cadastrar();"> 
+    <div class="form-group col">
+      <input  
+        type="text"
+        class="form-control" 
+        placeholder="CPF" 
+        autocomplete="off"
+        formControlName="cpf"
+      >
+      <small *ngIf="formulario.get('cpf').valid && formulario.get('cpf').touched" class="form-text text-success">CPF válido.</small>
+      <small *ngIf="!formulario.get('cpf').valid && formulario.get('cpf').touched" class="form-text text-danger">CPF inválido.</small>
+    </div>
+    <div class="form-group col">
+      <input
+        type="text"
+        class="form-control" 
+        placeholder="Nome" 
+        autocomplete="off"
+        formControlName="nome"
+      >
+      <small *ngIf="formulario.get('nome').valid && formulario.get('nome').touched" class="form-text text-success">Nome válido.</small>
+      <small *ngIf="!formulario.get('nome').valid && formulario.get('nome').touched" class="form-text text-danger">Nome inválido.</small>
+    </div>
+    <div class="form-group col">
+      <input
+        type="text"
+        class="form-control" 
+        placeholder="Sexo" 
+        autocomplete="off"
+        formControlName="sexo"
+      >
+      <small *ngIf="formulario.get('sexo').valid && formulario.get('sexo').touched" class="form-text text-success">Sexo válido.</small>
+      <small *ngIf="!formulario.get('sexo').valid && formulario.get('sexo').touched" class="form-text text-danger">Sexo inválido.</small>
+    </div>
+    <div class="form-group col">
+      <input
+        type="text"
+        class="form-control" 
+        placeholder="Data de Nascimento" 
+        autocomplete="off"
+        formControlName="dat_nasc"
+      >
+      <small *ngIf="formulario.get('dat_nasc').valid && formulario.get('dat_nasc').touched" class="form-text text-success">Data de Nascimento válida.</small>
+      <small  *ngIf="!formulario.get('dat_nasc').valid && formulario.get('dat_nasc').touched" class="form-text text-danger">Data de Nascimento inválida.</small>
+    </div>
+    <div class="form-group col">
+      <input
+        type="text"
+        class="form-control" 
+        placeholder="E-mail" 
+        autocomplete="off"
+        formControlName="email"
+      >
+      <small *ngIf="formulario.get('email').valid && formulario.get('email').touched" class="form-text text-success">E-mail válido.</small>
+      <small *ngIf="!formulario.get('email').valid && formulario.get('email').touched" class="form-text text-danger">E-mail inválido.</small>
+    </div>
+    <div class="form-group col">
+      <input
+        type="text"
+        class="form-control" 
+        placeholder="Telefone" 
+        autocomplete="off"
+        formControlName="phone"
+      >
+      <small *ngIf="formulario.get('phone').valid && formulario.get('phone').touched" class="form-text text-success">Telefone válido.</small>
+      <small *ngIf="!formulario.get('phone').valid && formulario.get('phone').touched" class="form-text text-danger">Telefone inválido.</small>
+    </div>
+    <div class="form-group col">
+      <button 
+        type="submit"
+        class="btn btn-primary"
+        [disabled]=!formulario.valid
+        >
+        Cadastrar
+      </button>
+    </div>
+  </form>
+
+  <table class="table" style="margin-top: 40px; margin-left: 18px;">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>CPF</th>
+        <th>Nome completo</th>
+        <th>Sexo</th>
+        <th>Data de Nascimento</th>
+        <th>E-mail</th>
+        <th>Telefone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cliente of clientes">
+        <td>{{cliente.id}}</td>
+        <td>{{cliente.cpf | CPF}}</td>
+        <td>{{cliente.nome}}</td>
+        <td>{{cliente.sexo}}</td>
+        <td>{{cliente.dat_nasc | date:'dd/MM/yyyy'}}</td>
+        <td>{{cliente.email}}</td>
+        <td>{{cliente.phone | phone}}</td>
+        <td><button class="btn btn-info" type="button" (click)="atualizar(cliente.id);">Atualizar</button></td>
+        <td><button class="btn btn-danger" type="button" (click)="remover(cliente.id);">Deletar</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
